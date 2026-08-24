@@ -50,7 +50,7 @@ export const SOCIAL_LINKS = [
   {
     id: "twitter",
     label: "X (Twitter)",
-    href: "https://x.com/aromalramesh", // ← update
+    href: "https://x.com/AromalRm7",
   },
   {
     id: "email",
@@ -78,7 +78,7 @@ export const TECH_STACK: TechItem[] = [
   { name: "Python", Icon: SiPython, color: "#3776AB", icon: "/images/tech/python.svg" },
   { name: "SQL", Icon: Database, generic: true, icon: "/images/tech/sql-server.svg" },
   { name: "PostgreSQL", Icon: SiPostgresql, color: "#4169E1", icon: "/images/tech/postgresql.svg" },
-  { name: "Power BI", Icon: PieChart, generic: true },
+  { name: "Power BI", Icon: PieChart, generic: true, icon: "/images/tech/power-bi.svg" },
   { name: "AWS", Icon: Cloud, generic: true, icon: "/images/tech/aws.svg" },
   { name: "Git", Icon: SiGit, color: "#F03C2E", icon: "/images/tech/git.svg" },
   { name: "FastAPI", Icon: SiFastapi, color: "#009688", icon: "/images/tech/fastapi.svg" },

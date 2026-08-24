@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { MapPin, Mail, Github, Linkedin, Twitter } from "lucide-react";
 import { PERSONAL_INFO, SOCIAL_LINKS } from "@/lib/data";
@@ -26,14 +27,15 @@ export function Hero() {
       >
         {/* Avatar */}
         <div className="relative inline-block mb-4">
-          {/* Replace with next/image + /images/profile.jpg for a real photo */}
-          <div
-            className="w-20 h-20 rounded-full border border-border bg-gradient-to-br from-[#1a1a2e] to-[#16213e] flex items-center justify-center"
-            aria-hidden="true"
-          >
-            <span className="text-2xl font-bold text-muted-foreground select-none">
-              {PERSONAL_INFO.initials}
-            </span>
+          <div className="relative h-20 w-20 overflow-hidden rounded-full border border-border bg-card">
+            <Image
+              src="/images/profile.jpg"
+              alt={`${PERSONAL_INFO.name} profile photo`}
+              fill
+              sizes="80px"
+              className="object-cover object-[center_35%]"
+              priority
+            />
           </div>
           {PERSONAL_INFO.availableForWork && (
             <span
