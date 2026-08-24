@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { PERSONAL_INFO, TECH_STACK } from "@/lib/data";
-import { Database } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About",
@@ -10,28 +9,11 @@ export const metadata: Metadata = {
     "Learn more about Aromal Ramesh — Data Analyst based in Bengaluru, India. Background, skills, projects, and education.",
 };
 
-const PROJECTS = [
-  {
-    name: "Food Delivery & Restaurant Analytics",
-    stack: "Snowflake · dbt · Airflow · Power BI",
-    points: [
-      "Ingested order, delivery, and restaurant data on schedule using Apache Airflow ETL/ELT workflows",
-      "Modeled raw event data into analytics-ready tables with dbt inside a Snowflake data warehouse",
-      "Wrote SQL transformations for KPIs such as average delivery time, order value, cancellation rate, and peak-hour demand",
-      "Built Power BI dashboards surfacing restaurant performance and delivery SLA trends",
-    ],
-  },
-  {
-    name: "Supply Chain & Inventory Operations Analytics",
-    stack: "Google BigQuery · dbt · Airflow · Tableau",
-    points: [
-      "Orchestrated scheduled ELT workflows in Apache Airflow to load inventory, purchase order, and supplier data into BigQuery",
-      "Modeled staging and reporting layers with dbt to produce clean, analytics-ready operations tables",
-      "Wrote SQL to calculate inventory turnover, reorder points, stockout rates, and supplier lead times",
-      "Built Tableau dashboards tracking stock levels and supply chain KPIs",
-    ],
-  },
-];
+const PROJECTS: {
+  name: string;
+  stack: string;
+  points: string[];
+}[] = [];
 
 const EDUCATION = [
   {
@@ -76,48 +58,49 @@ export default function AboutPage() {
                 key={tech.name}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card text-sm text-foreground"
               >
-                {tech.noLogo ? (
-                  <Database size={14} className="text-muted-foreground" />
-                ) : (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={tech.icon}
-                    alt=""
-                    width={14}
-                    height={14}
-                    className="w-3.5 h-3.5 object-contain"
-                  />
-                )}
+                <tech.Icon
+                  size={14}
+                  className={tech.color ? undefined : "text-muted-foreground"}
+                  color={tech.color}
+                />
                 {tech.name}
               </span>
             ))}
           </div>
         </Section>
 
-        {/* Projects */}
-        <Section title="Projects">
-          <div className="space-y-8">
-            {PROJECTS.map((p) => (
-              <div key={p.name}>
-                <h3 className="text-base font-semibold text-foreground">
-                  {p.name}
-                </h3>
-                <p className="text-xs text-muted-foreground mb-3">{p.stack}</p>
-                <ul className="space-y-1.5">
-                  {p.points.map((pt, i) => (
-                    <li
-                      key={i}
-                      className="flex gap-2 text-sm text-muted-foreground"
-                    >
-                      <span className="text-muted-foreground/50 shrink-0">—</span>
-                      <span>{pt}</span>
-                    </li>
-                  ))}
-                </ul>
+        {PROJECTS.length > 0 && (
+          <>
+            {/* Projects */}
+            <Section title="Projects">
+              <div className="space-y-8">
+                {PROJECTS.map((p) => (
+                  <div key={p.name}>
+                    <h3 className="text-base font-semibold text-foreground">
+                      {p.name}
+                    </h3>
+                    <p className="text-xs text-muted-foreground mb-3">
+                      {p.stack}
+                    </p>
+                    <ul className="space-y-1.5">
+                      {p.points.map((pt, i) => (
+                        <li
+                          key={i}
+                          className="flex gap-2 text-sm text-muted-foreground"
+                        >
+                          <span className="text-muted-foreground/50 shrink-0">
+                            —
+                          </span>
+                          <span>{pt}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </Section>
+            </Section>
+          </>
+        )}
 
         {/* Education */}
         <Section title="Education">

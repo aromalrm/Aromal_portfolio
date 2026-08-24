@@ -2,28 +2,33 @@
 // SITE DATA — Edit this file to customize all portfolio content
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Simple Icons CDN helper. Pass a color (hex without #, or "white") for
-// logos whose brand color is too dark to read on a dark background.
-const si = (slug: string, color?: string) =>
-  `https://cdn.simpleicons.org/${slug}${color ? `/${color}` : ""}`;
+import type { ReactNode } from "react";
+import {
+  SiPython,
+  SiPostgresql,
+  SiGit,
+  SiFastapi,
+  SiSnowflake,
+} from "react-icons/si";
+import { Database, Cloud, PieChart } from "lucide-react";
 
 // ─── PERSONAL INFO ────────────────────────────────────────────────────────────
 
 export const PERSONAL_INFO = {
   name: "Aromal Ramesh",
   initials: "AR",
-  title: "Data Analyst",
+  title: "Data Science • Engineer • Monomath",
   location: "Bengaluru, India",
   email: "aaromalrm@gmail.com", // ← change to aaromalr7@gmail.com if that's the correct one
   phone: "+91 97478 87161",
   pronouns: "he/him",
 
   // Bio shown under the name on the home page
-  bio: "I turn raw data into clear, actionable insights—collecting, cleaning, and analyzing data to uncover trends, build interactive dashboards, and support confident, data-driven decisions. I focus on accurate reporting and meaningful analysis that drives real business impact.",
+  bio: "Aspiring AI engineer building fun, experimental projects at the intersection of AI and data. I also work across data science—collecting, cleaning, and analyzing data to uncover trends, build dashboards, and turn numbers into insights that matter.",
 
   // Longer bio for the About page
   longBio:
-    "Data Analyst based in Bengaluru, India. Data-driven graduate with hands-on project experience building ETL/ELT pipelines, writing SQL queries, and developing Python-based workflows for data cleaning, transformation, and analysis. Skilled at turning structured and unstructured data into actionable insights and dashboards using tools such as Power BI, Tableau, dbt, and Snowflake.",
+    "Data Analyst based in Bengaluru, India. Data-driven graduate building ETL/ELT pipelines, writing SQL queries, and developing Python-based workflows for data cleaning, transformation, and analysis. Skilled at turning structured and unstructured data into actionable insights and dashboards using tools such as Power BI, Tableau, dbt, and Snowflake.",
 
   availableForWork: true,
 };
@@ -59,35 +64,32 @@ export const SOCIAL_LINKS = [
 // See README "Spotify Integration" to wire up your real recently-played track.
 
 export const SPOTIFY_FALLBACK = {
-  title: "Midnight City",
-  artist: "M83",
+  title: "Apna Time Ayega",
+  artist: "Gully Boy",
   url: "https://open.spotify.com/", // ← put a real track URL, or leave the API to fill it
 };
 
 // ─── TECH STACK ───────────────────────────────────────────────────────────────
-// icon: a Simple Icons URL. mono: true → adaptive white/black (dark brand colors).
-// noLogo: true → no brand logo exists (rendered with a database glyph).
+// Icon: a local SVG path or react-icons/lucide-react component.
+// SVGL assets are used where the logo is available; the component fallback
+// remains for technologies without an SVGL catalog entry.
 
 export const TECH_STACK: TechItem[] = [
-  { name: "Python", icon: si("python") },
-  { name: "SQL", icon: "", noLogo: true },
-  { name: "Pandas", icon: si("pandas"), mono: true },
-  { name: "NumPy", icon: si("numpy"), mono: true },
-  { name: "PostgreSQL", icon: si("postgresql") },
-  { name: "Tableau", icon: si("tableau") },
-  { name: "Power BI", icon: si("powerbi") },
-  { name: "AWS", icon: si("amazonwebservices"), mono: true },
-  { name: "Git", icon: si("git") },
-  { name: "FastAPI", icon: si("fastapi") },
-  { name: "Snowflake", icon: si("snowflake") },
-  { name: "BigQuery", icon: si("googlebigquery") },
-  { name: "Azure", icon: si("microsoftazure") },
+  { name: "Python", Icon: SiPython, color: "#3776AB", icon: "/images/tech/python.svg" },
+  { name: "SQL", Icon: Database, generic: true, icon: "/images/tech/sql-server.svg" },
+  { name: "PostgreSQL", Icon: SiPostgresql, color: "#4169E1", icon: "/images/tech/postgresql.svg" },
+  { name: "Power BI", Icon: PieChart, generic: true },
+  { name: "AWS", Icon: Cloud, generic: true, icon: "/images/tech/aws.svg" },
+  { name: "Git", Icon: SiGit, color: "#F03C2E", icon: "/images/tech/git.svg" },
+  { name: "FastAPI", Icon: SiFastapi, color: "#009688", icon: "/images/tech/fastapi.svg" },
+  { name: "Snowflake", Icon: SiSnowflake, color: "#29B5E8" },
 ];
 
-// Small icons for project/experience tech badges
-const badge = (name: string, slug: string, color?: string): TechItem => ({
+// Small icons for project tech badges
+const badge = (name: string, Icon: IconComponent, color?: string): TechItem => ({
   name,
-  icon: si(slug, color),
+  Icon,
+  color,
 });
 
 // ─── PROJECTS ─────────────────────────────────────────────────────────────────
@@ -96,38 +98,34 @@ const badge = (name: string, slug: string, color?: string): TechItem => ({
 
 export const PROJECTS: Project[] = [
   {
-    id: "daydream",
-    name: "Daydream",
-    url: "daydream.ing",
+    id: "aarogya",
+    name: "Aarogya",
+    url: "aarogya-health-eight.vercel.app",
     description:
-      "Conversational AI fashion discovery platform. Analyzed user search behavior and catalog data to surface conversion insights, built reporting on query intent, and shaped ranking metrics across thousands of brand catalogs.",
-    image: undefined,
-    gradient: "linear-gradient(135deg, #2b1055 0%, #7597de 100%)",
-    githubUrl: "https://github.com/aromalrm", // ← update
-    techStack: [
-      badge("Python", "python"),
-      badge("SQL", "postgresql"),
-      badge("Pandas", "pandas", "ffffff"),
-      badge("BigQuery", "googlebigquery"),
-      badge("Tableau", "tableau"),
-    ],
+      "Voice-first healthcare access platform for clinics, using AI and WhatsApp agents to handle calls, bookings, reminders, and patient questions.",
+    image: "/images/aarogya.jpg",
+    status: "Active",
+    techStack: [],
   },
   {
-    id: "cometly",
-    name: "Cometly",
-    url: "cometly.com",
+    id: "rightway",
+    name: "RightWay",
+    url: "rightway-dusky.vercel.app",
     description:
-      "Marketing attribution analytics platform. Modeled multi-touch attribution and built dashboards tying ad spend to revenue, analyzing millions of server-side events to measure campaign ROI and channel performance.",
-    image: undefined,
-    gradient: "linear-gradient(135deg, #0b486b 0%, #3b8686 100%)",
-    githubUrl: "https://github.com/aromalrm", // ← update
-    techStack: [
-      badge("SQL", "postgresql"),
-      badge("Snowflake", "snowflake"),
-      badge("Python", "python"),
-      badge("Power BI", "powerbi"),
-      badge("Azure", "microsoftazure"),
-    ],
+      "Claims intelligence platform that surfaces critical details across complex case files, timelines, documents, and signals.",
+    image: "/images/rightway.jpg",
+    status: "Building",
+    techStack: [],
+  },
+  {
+    id: "skinscan",
+    name: "SkinScan",
+    url: "skinscan-fawn.vercel.app",
+    description:
+      "AI dermatology assistant for checking visible skin concerns, moles, rashes, acne, eczema, and other skin conditions.",
+    image: "/images/skinscan.jpg",
+    status: "Building",
+    techStack: [],
   },
 ];
 
@@ -140,11 +138,22 @@ export const QUOTE = {
 
 // ─── TYPES ────────────────────────────────────────────────────────────────────
 
+// Plain callable type (not React.ComponentType) so both react-icons functions
+// and lucide-react's ForwardRefExoticComponent structurally match — comparing
+// against ComponentType trips on their differing/absent propTypes shapes.
+export type IconComponent = (props: {
+  size?: number;
+  color?: string;
+  className?: string;
+  strokeWidth?: number;
+}) => ReactNode;
+
 export interface TechItem {
   name: string;
-  icon: string;
-  mono?: boolean;
-  noLogo?: boolean;
+  Icon: IconComponent;
+  color?: string; // brand hex; omitted → adapts to the current text color
+  generic?: boolean; // true for glyphs standing in for a brand with no icon
+  icon?: string; // local SVG asset from SVGL
 }
 
 export interface Project {
@@ -155,5 +164,6 @@ export interface Project {
   image?: string;
   gradient?: string;
   githubUrl?: string;
+  status?: "Active" | "Building";
   techStack: TechItem[];
 }

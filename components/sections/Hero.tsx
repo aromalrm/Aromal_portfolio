@@ -7,7 +7,7 @@ import { NowPlaying } from "@/components/ui/NowPlaying";
 
 const SOCIAL_ICONS: Record<
   string,
-  React.ComponentType<{ size?: number; strokeWidth?: number }>
+  (props: { size?: number; strokeWidth?: number }) => React.ReactNode
 > = {
   github: Github,
   linkedin: Linkedin,

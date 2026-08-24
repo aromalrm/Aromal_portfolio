@@ -1,9 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
-import { Database } from "lucide-react";
 import { TECH_STACK, type TechItem } from "@/lib/data";
 
 const container = {
@@ -16,23 +13,17 @@ const item = {
 };
 
 export function TechStack() {
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  const isDark = !mounted || resolvedTheme === "dark";
-
   return (
-    <section className="px-5 py-6" aria-labelledby="techstack-heading">
+    <section className="px-5 py-5" aria-labelledby="techstack-heading">
       <h2
         id="techstack-heading"
-        className="text-[11.5px] font-semibold text-foreground text-center tracking-wide mb-4"
+        className="text-[11.5px] font-semibold text-foreground text-center tracking-wide mb-3"
       >
         TECH STACK
       </h2>
 
       <motion.div
-        className="flex flex-wrap justify-center gap-x-[22px] gap-y-[18px] max-w-[480px] mx-auto"
+        className="grid grid-cols-2 sm:grid-cols-4 gap-2 max-w-[520px] mx-auto"
         variants={container}
         initial="hidden"
         whileInView="show"
@@ -40,7 +31,7 @@ export function TechStack() {
       >
         {TECH_STACK.map((tech) => (
           <motion.div key={tech.name} variants={item}>
-            <TechIcon tech={tech} isDark={isDark} />
+            <TechIcon tech={tech} />
           </motion.div>
         ))}
       </motion.div>
@@ -48,39 +39,33 @@ export function TechStack() {
   );
 }
 
-function TechIcon({ tech, isDark }: { tech: TechItem; isDark: boolean }) {
-  // No official brand logo (e.g. SQL) → database glyph
-  if (tech.noLogo) {
-    return (
-      <div
-        className="w-[46px] h-[46px] flex items-center justify-center transition-transform duration-150 hover:-translate-y-[3px] hover:scale-110"
-        title={tech.name}
-      >
-        <Database size={30} className="text-foreground" strokeWidth={1.75} />
-      </div>
-    );
-  }
-
-  // Adaptive color for logos whose brand color is too dark on a dark bg.
-  // tech.icon looks like "https://cdn.simpleicons.org/<slug>"; append a color.
-  const src = tech.mono
-    ? `${tech.icon}/${isDark ? "white" : "111111"}`
-    : tech.icon;
+function TechIcon({ tech }: { tech: TechItem }) {
+  const { Icon, name, color, generic, icon } = tech;
 
   return (
     <div
-      className="w-[46px] h-[46px] flex items-center justify-center transition-transform duration-150 hover:-translate-y-[3px] hover:scale-110"
-      title={tech.name}
+      className="group flex min-h-[68px] flex-col items-center justify-center gap-1 rounded-lg border border-border bg-card px-1.5 py-2 transition-all duration-150 hover:-translate-y-0.5 hover:border-foreground/30 hover:bg-accent focus-within:-translate-y-0.5 focus-within:border-foreground/30"
+      title={name}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={src}
-        alt={`${tech.name} logo`}
-        width={36}
-        height={36}
-        className="w-9 h-9 object-contain"
-        loading="lazy"
-      />
+      {icon ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={icon}
+          alt=""
+          aria-hidden="true"
+          className="h-5 w-5 object-contain"
+        />
+      ) : (
+        <Icon
+          size={generic ? 20 : 22}
+          strokeWidth={generic ? 1.75 : undefined}
+          className={color ? undefined : "text-foreground"}
+          color={color}
+        />
+      )}
+      <span className="text-[9px] font-medium text-muted-foreground group-hover:text-foreground group-focus-within:text-foreground">
+        {name}
+      </span>
     </div>
   );
 }

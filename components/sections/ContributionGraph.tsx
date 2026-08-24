@@ -9,6 +9,11 @@ interface ContributionDay {
   level: 0 | 1 | 2 | 3 | 4;
 }
 
+interface ContributionResponse {
+  total: number;
+  days: { date: string; count: number; level: number }[];
+}
+
 // Deterministic seeded RNG so server & client render identically (no hydration mismatch)
 function seededContributions(): ContributionDay[] {
   const days: ContributionDay[] = [];
@@ -50,13 +55,37 @@ const DARK = ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"];
 const LIGHT = ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"];
 
 export function ContributionGraph() {
-  const days = useMemo(() => seededContributions(), []);
-  const total = days.reduce((sum, d) => sum + d.count, 0);
+  const fallbackDays = useMemo(() => seededContributions(), []);
+  const [days, setDays] = useState(fallbackDays);
+  const [total, setTotal] = useState(() =>
+    fallbackDays.reduce((sum, day) => sum + day.count, 0),
+  );
+
+  useEffect(() => {
+    fetch("/api/github-contributions")
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data: ContributionResponse | null) => {
+        if (!data?.days?.length) return;
+        setDays(
+          data.days.map((day) => ({
+            date: new Date(`${day.date}T00:00:00`),
+            count: day.count,
+            level: Math.min(day.level, 4) as 0 | 1 | 2 | 3 | 4,
+          })),
+        );
+        setTotal(data.total);
+      })
+      .catch(() => undefined);
+  }, []);
 
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   const palette = !mounted || resolvedTheme === "dark" ? DARK : LIGHT;
+
+  const yearRange = `${days[0]?.date.getFullYear()}–${String(
+    days[days.length - 1]?.date.getFullYear(),
+  ).slice(2)}`;
 
   const weeks: ContributionDay[][] = [];
   let cur: ContributionDay[] = [];
@@ -77,13 +106,6 @@ export function ContributionGraph() {
         monthLabels.push({ label: m, weekIndex: wi });
     }
   });
-
-  const startYear = days[0]?.date.getFullYear();
-  const endYear = days[days.length - 1]?.date.getFullYear();
-  const yearRange =
-    startYear === endYear
-      ? `${startYear}`
-      : `${startYear}\u2013${String(endYear).slice(2)}`;
 
   return (
     <section

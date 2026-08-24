@@ -14,6 +14,8 @@ const card = {
 };
 
 export function Projects() {
+  if (PROJECTS.length === 0) return null;
+
   return (
     <section
       id="projects"
@@ -46,12 +48,12 @@ export function Projects() {
               <img
                 src={project.image}
                 alt={`${project.name} screenshot`}
-                className="w-full h-[72px] object-cover"
+                className="w-full aspect-[20/9] object-cover"
                 loading="lazy"
               />
             ) : (
               <div
-                className="w-full h-[72px] flex items-center justify-center"
+                className="w-full aspect-[20/9] flex items-center justify-center"
                 style={{ background: project.gradient }}
                 aria-hidden="true"
               >
@@ -69,24 +71,43 @@ export function Projects() {
                     {project.name}
                   </h3>
                   {project.url && (
-                    <span className="text-[9.5px] text-muted-foreground">
-                      {project.url}
-                    </span>
+                    <a
+                      href={`https://${project.url}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Visit ${project.name} website`}
+                      className="inline-flex items-center rounded-[5px] border border-border px-1.5 py-px text-[9.5px] text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
+                    >
+                      Website
+                    </a>
                   )}
                 </div>
 
-                {project.githubUrl && (
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`View ${project.name} code on GitHub`}
-                    className="shrink-0 inline-flex items-center gap-1 text-[9.5px] text-muted-foreground border border-border rounded-[5px] px-1.5 py-px hover:bg-accent hover:text-foreground transition-colors"
-                  >
-                    <Github size={10} />
-                    Code
-                  </a>
-                )}
+                <div className="flex shrink-0 items-center gap-1.5">
+                  {project.status && (
+                    <span
+                      className={`text-[9.5px] ${
+                        project.status === "Active"
+                          ? "text-emerald-500"
+                          : "text-amber-500"
+                      }`}
+                    >
+                      {project.status}
+                    </span>
+                  )}
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`View ${project.name} code on GitHub`}
+                      className="inline-flex items-center gap-1 text-[9.5px] text-muted-foreground border border-border rounded-[5px] px-1.5 py-px hover:bg-accent hover:text-foreground transition-colors"
+                    >
+                      <Github size={10} />
+                      Code
+                    </a>
+                  )}
+                </div>
               </div>
 
               <p className="text-[10.5px] text-muted-foreground leading-relaxed mb-[7px]">
@@ -99,15 +120,7 @@ export function Projects() {
                     key={tech.name}
                     className="inline-flex items-center gap-1 text-[9.5px] text-muted-foreground border border-border rounded-full px-2 py-px bg-background"
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={tech.icon}
-                      alt=""
-                      width={10}
-                      height={10}
-                      className="w-2.5 h-2.5 object-contain"
-                      loading="lazy"
-                    />
+                    <tech.Icon size={10} color={tech.color} />
                     {tech.name}
                   </span>
                 ))}

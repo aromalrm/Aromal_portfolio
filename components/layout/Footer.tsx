@@ -10,7 +10,7 @@ const FOOTER_NAV = [
 
 const SOCIAL_ICONS: Record<
   string,
-  React.ComponentType<{ size?: number }>
+  (props: { size?: number }) => React.ReactNode
 > = {
   github: Github,
   linkedin: Linkedin,
