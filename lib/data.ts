@@ -17,7 +17,7 @@ import { Database, Cloud, PieChart } from "lucide-react";
 export const PERSONAL_INFO = {
   name: "Aromal Ramesh",
   initials: "AR",
-  title: "Data Science • Engineer • Monomath",
+  title: "GTM Engineer",
   location: "Bengaluru, India",
   email: "aaromalrm@gmail.com", // ← change to aaromalr7@gmail.com if that's the correct one
   phone: "+91 97478 87161",
