@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { BookSpine } from "@/components/sections/BookSpine";
 import { BOOKS } from "@/lib/books";
 
 export function Bookshelf() {
@@ -17,19 +17,11 @@ export function Bookshelf() {
         </h2>
 
         <div className="mt-9 overflow-x-auto">
-          <ul className="flex w-max items-end gap-[clamp(3px,0.8vw,5px)]">
+          <ul className="flex w-max items-end gap-[6px]">
             {BOOKS.map((book) => (
               <li key={book.id} className="shrink-0">
-                <Image
-                  src={book.src}
-                  alt={book.alt}
-                  width={book.width}
-                  height={book.height}
-                  unoptimized
-                  draggable={false}
-                  style={{ width: "auto" }}
-                  className="h-[clamp(156px,48vw,278px)] w-auto select-none"
-                />
+                <span className="sr-only">{book.alt}</span>
+                <BookSpine book={book} />
               </li>
             ))}
           </ul>
