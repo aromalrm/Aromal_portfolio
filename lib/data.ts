@@ -93,38 +93,44 @@ const badge = (name: string, Icon: IconComponent, color?: string): TechItem => (
 });
 
 // ─── PROJECTS ─────────────────────────────────────────────────────────────────
-// image: URL or /images/... ; leave undefined for a gradient placeholder.
-// Only a "Code" link is shown (githubUrl).
+// Home grid, in order: top-left, top-right, bottom-left, bottom-right.
+// image: /images/... shown in full (do not crop). No external links yet.
 
 export const PROJECTS: Project[] = [
   {
-    id: "aarogya",
-    name: "Aarogya",
-    url: "aarogya-health-eight.vercel.app",
-    description:
-      "Voice-first healthcare access platform for clinics, using AI and WhatsApp agents to handle calls, bookings, reminders, and patient questions.",
-    image: "/images/aarogya.jpg",
-    status: "Active",
+    id: "medici",
+    name: "Medici",
+    description: "Position 1",
+    image: "/images/medici.png",
+    imageWidth: 1892,
+    imageHeight: 855,
     techStack: [],
   },
   {
-    id: "rightway",
-    name: "RightWay",
-    url: "rightway-dusky.vercel.app",
-    description:
-      "Claims intelligence platform that surfaces critical details across complex case files, timelines, documents, and signals.",
-    image: "/images/rightway.jpg",
-    status: "Building",
+    id: "healthy",
+    name: "Healthy",
+    description: "Position 2",
+    image: "/images/healthy.png",
+    imageWidth: 1840,
+    imageHeight: 848,
     techStack: [],
   },
   {
-    id: "skinscan",
-    name: "SkinScan",
-    url: "skinscan-fawn.vercel.app",
-    description:
-      "AI dermatology assistant for checking visible skin concerns, moles, rashes, acne, eczema, and other skin conditions.",
-    image: "/images/skinscan.jpg",
-    status: "Building",
+    id: "babyblink",
+    name: "BabyBlink",
+    description: "Position 3",
+    image: "/images/babyblink.png",
+    imageWidth: 1493,
+    imageHeight: 847,
+    techStack: [],
+  },
+  {
+    id: "remember",
+    name: "Remember",
+    description: "Position 4",
+    image: "/images/remember.png",
+    imageWidth: 1882,
+    imageHeight: 846,
     techStack: [],
   },
 ];
@@ -162,6 +168,8 @@ export interface Project {
   url?: string;
   description: string;
   image?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   gradient?: string;
   githubUrl?: string;
   status?: "Active" | "Building";
