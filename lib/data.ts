@@ -94,7 +94,7 @@ const badge = (name: string, Icon: IconComponent, color?: string): TechItem => (
 
 // ─── PROJECTS ─────────────────────────────────────────────────────────────────
 // Home grid, in order: top-left, top-right, bottom-left, bottom-right.
-// image: /images/... shown in full (do not crop). No external links yet.
+// image: /images/... shown in one shared 16:9 frame (cover, centered). No external links yet.
 
 export const PROJECTS: Project[] = [
   {

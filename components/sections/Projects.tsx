@@ -39,15 +39,15 @@ export function Projects() {
           {PROJECTS.map((project) => (
             <motion.article key={project.id} variants={card}>
               {project.image ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={project.image}
-                  alt={`${project.name} screenshot`}
-                  width={project.imageWidth}
-                  height={project.imageHeight}
-                  className="h-auto w-full rounded-[22px]"
-                  loading="lazy"
-                />
+                <div className="relative aspect-video w-full overflow-hidden rounded-[22px]">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={project.image}
+                    alt={`${project.name} screenshot`}
+                    className="absolute inset-0 h-full w-full object-cover object-center"
+                    loading="lazy"
+                  />
+                </div>
               ) : null}
 
               <h3 className="mt-4 text-[17px] font-semibold leading-tight tracking-tight text-white">
