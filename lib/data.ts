@@ -18,7 +18,7 @@ export const PERSONAL_INFO = {
   name: "Aromal Ramesh",
   initials: "AR",
   title: "GTM Engineer",
-  location: "Bengaluru, India",
+  location: "Bengaluru, Karnataka",
   email: "aaromalrm@gmail.com", // ← change to aaromalr7@gmail.com if that's the correct one
   phone: "+91 97478 87161",
   pronouns: "he/him",
