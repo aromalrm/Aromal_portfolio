@@ -1,8 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { MapPin, Mail, Github, Linkedin, Twitter } from "lucide-react";
+import { Mail, Github, Linkedin, Twitter } from "lucide-react";
 import { PERSONAL_INFO, SOCIAL_LINKS } from "@/lib/data";
 import { NowPlaying } from "@/components/ui/NowPlaying";
 
@@ -16,6 +17,41 @@ const SOCIAL_ICONS: Record<
   email: Mail,
 };
 
+const KOLKATA_TIME_ZONE = "Asia/Kolkata";
+
+/** Short local time, e.g. "1:53 pm", always in Asia/Kolkata. */
+function formatKolkataTime(date: Date): string {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: KOLKATA_TIME_ZONE,
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  })
+    .format(date)
+    .replace(/[\u202f\u00a0]/g, " ")
+    .toLowerCase();
+}
+
+function KolkataClock() {
+  const [time, setTime] = useState<string | null>(null);
+
+  useEffect(() => {
+    const tick = () => setTime(formatKolkataTime(new Date()));
+    tick();
+    const id = window.setInterval(tick, 1000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  return (
+    <time
+      suppressHydrationWarning
+      className="inline-block min-w-[4.75rem] text-left tabular-nums"
+    >
+      {time}
+    </time>
+  );
+}
+
 export function Hero() {
   return (
     <section className="border-b border-border">
@@ -25,53 +61,37 @@ export function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
       >
-        {/* Avatar */}
-        <div className="relative inline-block mb-4">
-          <div className="relative h-20 w-20 overflow-hidden rounded-full border border-border bg-card">
-            <Image
-              src="/images/profile.jpg"
-              alt={`${PERSONAL_INFO.name} profile photo`}
-              fill
-              sizes="80px"
-              className="object-cover object-[center_35%]"
-              priority
-            />
-          </div>
-          {PERSONAL_INFO.availableForWork && (
-            <span
-              className="absolute bottom-0.5 right-0.5 w-3 h-3 bg-green-500 border-2 border-background rounded-full"
-              title="Available for work"
-              aria-label="Available for work"
-            />
-          )}
+        <div className="relative mb-[22px] h-[120px] w-[120px] overflow-hidden rounded-2xl bg-card">
+          <Image
+            src="/images/profile.jpg"
+            alt={`${PERSONAL_INFO.name} profile photo`}
+            fill
+            sizes="120px"
+            className="object-cover object-center"
+            priority
+          />
         </div>
 
-        {/* Name + title */}
-        <h1 className="text-2xl font-bold text-foreground tracking-tight mb-1.5">
+        <h1 className="text-[30px] font-semibold leading-none tracking-tight text-foreground">
           {PERSONAL_INFO.name}
         </h1>
-        <p className="text-sm text-muted-foreground mb-4">
+        <p className="mt-[18px] text-[17px] leading-none text-muted-foreground">
           {PERSONAL_INFO.title}
         </p>
+        <p className="mt-3 mb-5 text-[13px] leading-none text-muted-foreground">
+          {PERSONAL_INFO.location}
+          <span aria-hidden="true"> · </span>
+          <KolkataClock />
+        </p>
 
-        {/* Info pills */}
-        <div className="flex flex-wrap justify-center gap-2 mb-4">
-          <InfoPill icon={<MapPin size={12} />} text={PERSONAL_INFO.location} />
-          <InfoPill icon={<Mail size={12} />} text={PERSONAL_INFO.email} />
-        </div>
-
-        {/* Bio */}
         <p className="text-sm text-muted-foreground leading-relaxed max-w-xl mb-4">
           {PERSONAL_INFO.bio}
         </p>
 
-        {/* Spotify last played */}
         <NowPlaying />
 
-        {/* Divider */}
         <div className="w-10 h-px bg-border my-4" />
 
-        {/* Icon-only social links */}
         <div className="flex flex-wrap justify-center gap-2.5">
           {SOCIAL_LINKS.map((link) => {
             const Icon = SOCIAL_ICONS[link.id];
@@ -92,14 +112,5 @@ export function Hero() {
         </div>
       </motion.div>
     </section>
-  );
-}
-
-function InfoPill({ icon, text }: { icon: React.ReactNode; text: string }) {
-  return (
-    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-border bg-card text-[11px]">
-      <span className="text-muted-foreground">{icon}</span>
-      <span className="text-foreground">{text}</span>
-    </div>
   );
 }
