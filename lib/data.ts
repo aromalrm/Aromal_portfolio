@@ -3,14 +3,6 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import type { ReactNode } from "react";
-import {
-  SiPython,
-  SiPostgresql,
-  SiGit,
-  SiFastapi,
-  SiSnowflake,
-} from "react-icons/si";
-import { Database, Cloud, PieChart } from "lucide-react";
 
 // ─── PERSONAL INFO ────────────────────────────────────────────────────────────
 
@@ -70,19 +62,30 @@ export const SPOTIFY_FALLBACK = {
 };
 
 // ─── TECH STACK ───────────────────────────────────────────────────────────────
-// Icon: a local SVG path or react-icons/lucide-react component.
-// SVGL assets are used where the logo is available; the component fallback
-// remains for technologies without an SVGL catalog entry.
+// Local SVG brand marks, in display order. Monochrome marks use the brand
+// color, or white when the official mark is near-black on the dark pills.
 
 export const TECH_STACK: TechItem[] = [
-  { name: "Python", Icon: SiPython, color: "#3776AB", icon: "/images/tech/python.svg" },
-  { name: "SQL", Icon: Database, generic: true, icon: "/images/tech/sql-server.svg" },
-  { name: "PostgreSQL", Icon: SiPostgresql, color: "#4169E1", icon: "/images/tech/postgresql.svg" },
-  { name: "Power BI", Icon: PieChart, generic: true, icon: "/images/tech/power-bi.svg" },
-  { name: "AWS", Icon: Cloud, generic: true, icon: "/images/tech/aws.svg" },
-  { name: "Git", Icon: SiGit, color: "#F03C2E", icon: "/images/tech/git.svg" },
-  { name: "FastAPI", Icon: SiFastapi, color: "#009688", icon: "/images/tech/fastapi.svg" },
-  { name: "Snowflake", Icon: SiSnowflake, color: "#29B5E8" },
+  { name: "Python", icon: "/images/tech/python.svg" },
+  { name: "SQL", icon: "/images/tech/sql-server.svg" },
+  { name: "PostgreSQL", icon: "/images/tech/postgresql.svg" },
+  { name: "Power BI", icon: "/images/tech/power-bi.svg" },
+  { name: "AWS", icon: "/images/tech/aws.svg" },
+  { name: "Git", icon: "/images/tech/git.svg" },
+  { name: "FastAPI", icon: "/images/tech/fastapi.svg" },
+  { name: "Snowflake", icon: "/images/tech/snowflake.svg" },
+  { name: "dbt", icon: "/images/tech/dbt.svg" },
+  { name: "Airflow", icon: "/images/tech/apache-airflow.svg" },
+  { name: "PySpark", icon: "/images/tech/pyspark.svg" },
+  { name: "Kafka", icon: "/images/tech/kafka.svg" },
+  { name: "OpenAI", icon: "/images/tech/openai.svg" },
+  { name: "Claude", icon: "/images/tech/claude.svg" },
+  { name: "Docker", icon: "/images/tech/docker.svg" },
+  { name: "GitHub", icon: "/images/tech/github.svg" },
+  { name: "Figma", icon: "/images/tech/figma.svg" },
+  { name: "HubSpot", icon: "/images/tech/hubspot.svg" },
+  { name: "Clay", icon: "/images/tech/clay.svg" },
+  { name: "Zapier", icon: "/images/tech/zapier.svg" },
 ];
 
 // Small icons for project tech badges
@@ -156,10 +159,10 @@ export type IconComponent = (props: {
 
 export interface TechItem {
   name: string;
-  Icon: IconComponent;
+  Icon?: IconComponent;
   color?: string; // brand hex; omitted → adapts to the current text color
   generic?: boolean; // true for glyphs standing in for a brand with no icon
-  icon?: string; // local SVG asset from SVGL
+  icon?: string; // local SVG brand mark
 }
 
 export interface Project {
