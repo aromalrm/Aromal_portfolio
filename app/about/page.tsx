@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { PERSONAL_INFO, TECH_STACK } from "@/lib/data";
+import { TechPills } from "@/components/ui/TechPills";
+import { PERSONAL_INFO } from "@/lib/data";
 
 export const metadata: Metadata = {
   title: "About",
@@ -52,21 +53,7 @@ export default function AboutPage() {
 
         {/* Skills */}
         <Section title="Skills">
-          <div className="flex flex-wrap gap-2">
-            {TECH_STACK.map((tech) => (
-              <span
-                key={tech.name}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card text-sm text-foreground"
-              >
-                <tech.Icon
-                  size={14}
-                  className={tech.color ? undefined : "text-muted-foreground"}
-                  color={tech.color}
-                />
-                {tech.name}
-              </span>
-            ))}
-          </div>
+          <TechPills className="justify-start" />
         </Section>
 
         {PROJECTS.length > 0 && (
