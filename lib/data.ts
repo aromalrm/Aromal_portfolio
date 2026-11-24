@@ -75,7 +75,7 @@ export const TECH_STACK: TechItem[] = [
   { name: "FastAPI", icon: "/images/tech/fastapi.svg" },
   { name: "Snowflake", icon: "/images/tech/snowflake.svg" },
   { name: "dbt", icon: "/images/tech/dbt.svg" },
-  { name: "Apache Airflow", icon: "/images/tech/apache-airflow.svg" },
+  { name: "Airflow", icon: "/images/tech/apache-airflow.svg" },
   { name: "PySpark", icon: "/images/tech/pyspark.svg" },
   { name: "Kafka", icon: "/images/tech/kafka.svg" },
   { name: "OpenAI", icon: "/images/tech/openai.svg" },
