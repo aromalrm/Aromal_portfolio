@@ -66,6 +66,14 @@ export const SPOTIFY_FALLBACK = {
 // color, or white when the official mark is near-black on the dark pills.
 
 export const TECH_STACK: TechItem[] = [
+  { name: "Python", icon: "/images/tech/python.svg" },
+  { name: "SQL", icon: "/images/tech/sql-server.svg" },
+  { name: "PostgreSQL", icon: "/images/tech/postgresql.svg" },
+  { name: "Power BI", icon: "/images/tech/power-bi.svg" },
+  { name: "AWS", icon: "/images/tech/aws.svg" },
+  { name: "Git", icon: "/images/tech/git.svg" },
+  { name: "FastAPI", icon: "/images/tech/fastapi.svg" },
+  { name: "Snowflake", icon: "/images/tech/snowflake.svg" },
   { name: "dbt", icon: "/images/tech/dbt.svg" },
   { name: "Apache Airflow", icon: "/images/tech/apache-airflow.svg" },
   { name: "PySpark", icon: "/images/tech/pyspark.svg" },
