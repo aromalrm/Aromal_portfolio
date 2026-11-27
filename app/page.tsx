@@ -7,6 +7,7 @@ import { Projects } from "@/components/sections/Projects";
 import { Bookshelf } from "@/components/sections/Bookshelf";
 import { Contact } from "@/components/sections/Contact";
 import { Quote } from "@/components/sections/Quote";
+import { GymCatFrame } from "@/components/sections/GymCatFrame";
 
 export default function HomePage() {
   return (
@@ -21,6 +22,7 @@ export default function HomePage() {
           <Bookshelf />
           <Contact />
           <Quote />
+          <GymCatFrame />
         </div>
       </main>
       <Footer />
