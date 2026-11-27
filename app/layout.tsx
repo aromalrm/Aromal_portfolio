@@ -14,7 +14,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://aromalramesh.dev";
 
 export const metadata: Metadata = {
   title: {
-    default: "Aromal Ramesh | Data Analyst",
+    default: "Aromal Ramesh",
     template: "%s | Aromal Ramesh",
   },
   description:
