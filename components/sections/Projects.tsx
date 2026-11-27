@@ -21,7 +21,7 @@ export function Projects() {
       className="bg-[#09090b] px-5 py-12 sm:px-8 sm:py-16"
       aria-labelledby="projects-heading"
     >
-      <div className="mx-auto w-full max-w-[920px]">
+      <div className="mx-auto w-full max-w-[800px]">
         <h2
           id="projects-heading"
           className="mb-7 text-[22px] font-semibold tracking-tight text-white sm:mb-8"
