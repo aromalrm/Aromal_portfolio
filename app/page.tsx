@@ -22,8 +22,8 @@ export default function HomePage() {
           <Bookshelf />
           <Contact />
           <Quote />
-          <GymCatFrame />
         </div>
+        <GymCatFrame />
       </main>
       <Footer />
     </div>
