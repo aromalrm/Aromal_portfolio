@@ -106,35 +106,6 @@ function PsychoCybernetics({ book }: { book: Book }) {
   );
 }
 
-function Meditations({ book }: { book: Book }) {
-  const w = 46;
-  return (
-    <Frame book={book} width={w} fill="#141414">
-      <rect width={w} height="16" fill="#e25b1a" />
-      <rect y="16" width={w} height="2" fill="#f0d7a2" />
-      <VText x={14} y={36} size={8.5} fill="#d9c7a1" weight={500} spacing={0.4}>
-        MARCUS AURELIUS
-      </VText>
-      <VText
-        x={31}
-        y={48}
-        size={18}
-        fill="#f4e7c8"
-        family={SERIF}
-        weight={600}
-        italic
-      >
-        Meditations
-      </VText>
-      <g transform="translate(23 300)" fill="#e25b1a">
-        <rect x="-7" y="-10" width="14" height="3" />
-        <rect x="-2.2" y="-8" width="4.4" height="16" />
-        <rect x="-8" y="8" width="16" height="3" />
-      </g>
-    </Frame>
-  );
-}
-
 function NeverSplit({ book }: { book: Book }) {
   const w = 58;
   return (
@@ -147,24 +118,6 @@ function NeverSplit({ book }: { book: Book }) {
       <VText x={37} y={24} size={13.5} fill="#f7f7f5" spacing={0.2}>
         NEVER SPLIT THE DIFFERENCE
       </VText>
-    </Frame>
-  );
-}
-
-function Sapiens({ book }: { book: Book }) {
-  const w = 54;
-  return (
-    <Frame book={book} width={w} fill="#fbfbf8">
-      <VText x={15} y={28} size={8.5} fill="#6d6256" weight={600} spacing={0.3}>
-        YUVAL NOAH HARARI
-      </VText>
-      <VText x={36} y={36} size={22} fill="#1c1c1c" spacing={1.2}>
-        SAPIENS
-      </VText>
-      <g transform="translate(27 268)" fill="#c4552a" stroke="#c4552a" strokeLinecap="round">
-        <circle cx="0" cy="-16" r="4.2" stroke="none" />
-        <path d="M0 -12 V2 M0 -6 L-7 0 M0 -6 L7 0 M0 2 L-6 14 M0 2 L6 14" fill="none" strokeWidth="1.7" />
-      </g>
     </Frame>
   );
 }
@@ -235,15 +188,90 @@ function AtomicHabits({ book }: { book: Book }) {
   );
 }
 
+function DailyStoic({ book }: { book: Book }) {
+  const w = 50;
+  return (
+    <Frame book={book} width={w} fill="#1a1612">
+      <rect width={w} height="4" fill="#c6a15b" />
+      <rect y={H - 4} width={w} height="4" fill="#c6a15b" />
+      <VText x={14} y={34} size={8} fill="#c6a15b" weight={600} spacing={0.45}>
+        RYAN HOLIDAY
+      </VText>
+      <VText
+        x={33}
+        y={36}
+        size={15}
+        fill="#f4e7c8"
+        family={SERIF}
+        weight={600}
+        spacing={0.35}
+      >
+        THE DAILY STOIC
+      </VText>
+    </Frame>
+  );
+}
+
+function Almanack({ book }: { book: Book }) {
+  const w = 54;
+  return (
+    <Frame book={book} width={w} fill="#f6f0e4">
+      <rect x="5" y="12" width={w - 10} height="1.4" fill="#1c1a17" />
+      <rect x="5" y={H - 14} width={w - 10} height="1.4" fill="#1c1a17" />
+      <VText x={15} y={30} size={8} fill="#5c5346" weight={600} spacing={0.3}>
+        ERIC JORGENSON
+      </VText>
+      <VText x={36} y={24} size={12.2} fill="#1c1a17" family={SERIF} weight={700}>
+        The Almanack of Naval Ravikant
+      </VText>
+      <g transform="translate(27 304)" fill="none" stroke="#1c1a17" strokeWidth="1.2">
+        <path d="M0 -9 L6.5 0 L0 9 L-6.5 0 Z" />
+      </g>
+    </Frame>
+  );
+}
+
+function WinFriends({ book }: { book: Book }) {
+  const w = 58;
+  return (
+    <Frame book={book} width={w} fill="#f0c400">
+      <rect width={w} height="16" fill="#c8102e" />
+      <VText x={16} y={34} size={8} fill="#3d220c" weight={700} spacing={0.35}>
+        DALE CARNEGIE
+      </VText>
+      <VText x={38} y={28} size={11.6} fill="#1a1a1a" weight={750} spacing={-0.12}>
+        How to Win Friends and Influence People
+      </VText>
+    </Frame>
+  );
+}
+
+function SuperiorMan({ book }: { book: Book }) {
+  const w = 50;
+  return (
+    <Frame book={book} width={w} fill="#120d0e">
+      <rect width="6" height={H} fill="#8e1d2c" />
+      <VText x={18} y={32} size={7.6} fill="#e7c9a4" weight={600} spacing={0.35}>
+        DAVID DEIDA
+      </VText>
+      <VText x={35} y={26} size={12} fill="#f6efe2" family={SERIF} weight={600}>
+        The Way of the Superior Man
+      </VText>
+    </Frame>
+  );
+}
+
 const SPINES: Record<string, (props: { book: Book }) => React.ReactElement> = {
   "psycho-cybernetics": PsychoCybernetics,
-  meditations: Meditations,
-  "never-split-the-difference": NeverSplit,
-  sapiens: Sapiens,
   "mans-search-for-meaning": MansSearch,
-  "subtle-art": SubtleArt,
   "deep-work": DeepWork,
+  "never-split-the-difference": NeverSplit,
+  "daily-stoic": DailyStoic,
+  "subtle-art": SubtleArt,
+  "almanack-of-naval-ravikant": Almanack,
+  "how-to-win-friends": WinFriends,
   "atomic-habits": AtomicHabits,
+  "way-of-the-superior-man": SuperiorMan,
 };
 
 export function BookSpine({ book }: { book: Book }) {
