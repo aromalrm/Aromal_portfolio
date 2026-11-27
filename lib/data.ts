@@ -20,7 +20,7 @@ export const PERSONAL_INFO = {
 
   // Longer bio for the About page
   longBio:
-    "Data Analyst based in Bengaluru, India. Data-driven graduate building ETL/ELT pipelines, writing SQL queries, and developing Python-based workflows for data cleaning, transformation, and analysis. Skilled at turning structured and unstructured data into actionable insights and dashboards using tools such as Power BI, Tableau, dbt, and Snowflake.",
+    "Applied AI engineer building GTM systems that turn data into revenue. I design LLM-powered workflows, voice agents, and data pipelines that automate outreach, enrich leads, and surface the signals sales and marketing teams act on. With a data engineering background (SQL, Python, dbt, Airflow, Snowflake), I ship end-to-end: from messy data to dashboards to production AI automations.",
 
   availableForWork: true,
 };
